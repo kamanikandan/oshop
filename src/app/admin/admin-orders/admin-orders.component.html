@@ -1,0 +1,27 @@
+<h1>Manage Orders</h1>
+<div *ngIf="orders$ | async as orders">
+  <table class="table table-stripped">
+    <thead>
+      <th>Product</th>
+      <th></th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Ordered By</th>
+      <th>Date Placed</th>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let order of orders">
+        <tr *ngFor="let item of order.items">
+          <td>
+            <div [style.backgroundImage]="'url(' + item.product.imageUrl + ')'" class="thumbnail"></div>
+          </td>
+          <td> {{ item.product.title }} </td>
+          <td> {{ item.totalPrice | currency:"INR":true }} </td>
+          <td> {{ item.quantity }} </td>
+          <td> {{ order.shipping.name }} </td>
+          <td> {{ order.datePlaced | date}} </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
